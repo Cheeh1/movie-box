@@ -60,8 +60,17 @@ const MovieList = () => {
         setFavourites(newFavourites);
 
         // Save the updated favorites to local storage
-        
+        localStorage.setItem('favourites', JSON.stringify(newFavourites))
       };      
+
+      useEffect(() => {
+        const savedFavourites = localStorage.getItem('favourites')
+        if (savedFavourites) {
+            setFavourites(JSON.parse(savedFavourites))
+        } else {
+            setFavourites(Array(movies.length).fill(false))
+        }
+      },[movies.length])
 
     return (
         <>
