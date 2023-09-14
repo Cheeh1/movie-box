@@ -1,12 +1,10 @@
 import React from "react";
-import Header from "./components/Header";
-import Footer from "./components/Footer";
+import RouterLink from "./routes/router";
 
 const App = () => {
   return (
     <>
-    <Header />
-    <Footer />
+      <RouterLink />
     </>
   )
 }
