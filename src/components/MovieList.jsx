@@ -13,6 +13,8 @@ const MovieList = () => {
     const [movies, setMovies] = useState([]);
     const [genres, setGenres] = useState({});
     const [favourites, setFavourites] = useState(Array(movies.length).fill(false));
+    const [error, setError] = useState(null);
+
     const baseImageUrl = 'https://image.tmdb.org/t/p/w500';
 
     const convertToTwoDecimalPlaces = (number) => (Math.round(number * 100) / 10).toFixed(1); // function to convert the number to two numbers before decimal
@@ -22,7 +24,7 @@ const MovieList = () => {
         const apiUrl = import.meta.env.VITE_TMDB_URL;
         const apiKey = import.meta.env.VITE_TMDB_TOKEN;
 
-        axios.get(`${apiUrl}/3/movie/popular?api_key=${apiKey}`)
+        axios.get(`${apiUrl}/3/movie/top_rated?api_key=${apiKey}`)
             .then(res => {
                 console.log(res)
                 setMovies(res.data.results.slice(0, 10)); // Slice the array to include only the first 10 items
@@ -42,7 +44,7 @@ const MovieList = () => {
                         });
 
                         // Set the genre map in state
-                        console.log(genreRes)
+                        // console.log(genreRes)
                         setGenres(genreMap);
                     })
                     .catch(err => {
@@ -51,6 +53,7 @@ const MovieList = () => {
             })
             .catch(err => {
                 console.log("Error fetching movie data:", err);
+                setError('Failed to fetch movie details. Please try again later.')
             });
     }, []);
 
@@ -86,16 +89,19 @@ const MovieList = () => {
 
                 <section className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8 p-14">
                     {movies.map((movie, index) => (
-                        <section className="relative flex flex-col gap-2 border border-gray-300 rounded-lg p-4" key={movie.id}>
-                            <Link to={`/movie/${movie.id}`}>
-                                <img src={`${baseImageUrl}${movie.poster_path}`} alt="img-poster" />
+                        <section data-testid="movie-card" className="relative flex flex-col gap-2 border border-gray-300 rounded-lg p-4" key={movie.id}>
+                            <Link to={`/movies/${movie.id}`}>
+                                <img data-testid="movie-poster" src={`${baseImageUrl}${movie.poster_path}`} alt="img-poster" />
                             </Link>
                             <div onClick={() => toggle(index)} className="absolute right-7 top-7 border cursor-pointer rounded-2xl p-1 bg-[#f3f4f680]">
                                 {!favourites[index] ? (<img src={heart} alt="heart-logo" />) : (<i className="fa-solid fa-heart p-1 text-[#e13509]"></i>)}
                             </div>
-                            <p className="text-gray-400 text-[12px] font-bold">{`USA, ${movie.release_date.slice(0, 4)}`}</p>
-                            <Link to={`/movie/${movie.id}`}>
-                                <p className="text-gray-900 text-[18px] font-bold">{movie.title}</p>
+                            <div className="flex text-gray-400 text-[12px] font-bold">
+                                <p>USA,</p>
+                                <p data-testid="movie-release-date" >{movie.release_date.slice(0, 4)}</p>
+                            </div>
+                            <Link to={`/movies/${movie.id}`}>
+                                <p data-testid="movie-title" className="text-gray-900 text-[18px] font-bold">{movie.title}</p>
                             </Link>
                             <div className="flex items-center justify-between gap-5">
                                 <div className="flex gap-2 text-[12px]">
