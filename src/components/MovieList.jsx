@@ -24,7 +24,8 @@ const MovieList = () => {
         const apiUrl = import.meta.env.VITE_TMDB_URL;
         const apiKey = import.meta.env.VITE_TMDB_TOKEN;
 
-        axios.get(`${apiUrl}/3/movie/top_rated?api_key=${apiKey}`)
+        // axios.get(`${apiUrl}/3/movie/top_rated?api_key=${apiKey}`)
+        axios.get(`https://api.themoviedb.org/3/movie/top_rated?api_key=3b1fcd41484bafe02d0ed67ba239e809`)
             .then(res => {
                 console.log(res)
                 setMovies(res.data.results.slice(0, 10)); // Slice the array to include only the first 10 items
