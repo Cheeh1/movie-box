@@ -27,7 +27,7 @@ const MovieList = () => {
         axios.get(`${apiUrl}/3/movie/top_rated?api_key=${apiKey}`)
             .then(res => {
                 console.log(res)
-                setMovies(res.data.results); // Slice the array to include only the first 10 items
+                setMovies(res.data.results.slice(0, 10)); // Slice the array to include only the first 10 items
 
                 // Extract unique genre IDs from the movie data
                 const genreIds = Array.from(new Set(res.data.results.flatMap(movie => movie.genre_ids)));
