@@ -77,7 +77,7 @@ const MovieDetails = () => {
                 <div className="text-red-500">{error}</div>
             ) : 
             (<main className="flex gap-10">
-                <nav className="flex flex-col border rounded-r-[50px] gap-20 py-5 px-5">
+                <nav className="hidden sm:hidden md:hidden lg:flex flex-col border rounded-r-[50px] gap-20 py-5 px-5">
                     <div className="flex items-center gap-2">
                         <img className="w-[30px]" src={tv} alt="tv-logo" />
                         <p className="text-xl font-bold">MovieBox</p>
@@ -119,15 +119,15 @@ const MovieDetails = () => {
                         {/* <img className="border rounded-xl" src={`${baseImageUrl}${movies.backdrop_path}`} alt={movies.title} /> */}
                         <img className="ml-[450px] my-24 border rounded-3xl p-2" src={playBig} alt="logo" />
                     </div>
-                    <div className="flex justify-center items-center gap-5">
-                        <div className="flex gap-2 text-[18px] text-[#404040] font-medium ">
+                    <div className="flex flex-col lg:flex-row justify-center items-center gap-5">
+                        <div className="flex gap-2 text-[14px] lg:text-[18px] text-[#404040] font-medium ">
                             <p data-testid="movie-title">{movies.title}</p>
-                            <p className="text-2xl -mt-2 font-extrabold">.</p>
+                            <p className="lg:text-2xl text-xl -mt-2 font-extrabold">.</p>
                             {/* <p data-testid="movie-release-date">{(movies.release_date)}</p>  */}
                             <p data-testid="movie-release-date">{new Date(movies.release_date).toUTCString()}</p>
-                            <p className="text-2xl -mt-2 font-extrabold">.</p>
+                            <p className="lg:text-2xl text-xl -mt-2 font-extrabold">.</p>
                             <p>PG-13</p>
-                            <p className="text-2xl -mt-2 font-extrabold">.</p>
+                            <p className="lg:text-2xl text-xl -mt-2 font-extrabold">.</p>
                             <p data-testid="movie-runtime">{movies.runtime}</p>
                             {/* <p>{runtimeHours}h {runtimeMinutes}min</p> in hr and minutes */}
                         </div>
@@ -141,7 +141,7 @@ const MovieDetails = () => {
                             </div>
                         </div>
                     </div>
-                    <div className="flex gap-20">
+                    <div className="flex flex-col lg:flex-row gap-20">
                         <div className="flex flex-col gap-10">
                             <p data-testid="movie-overview" className="w-[500px] text-[14px] text-[#333]">{movies.overview}</p>
                             <div className="flex flex-col gap-5 text-[14px]">

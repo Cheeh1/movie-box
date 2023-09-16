@@ -4,6 +4,7 @@ import menu from '../assets/icons/menu.png'
 import play from '../assets/icons/play.png'
 import imdb from '../assets/icons/imdb.png'
 import berry from '../assets/icons/berry.png'
+import icon from '../assets/icons/Icon.png'
 
 const Header = () => {
     return (
@@ -15,8 +16,9 @@ const Header = () => {
                     <p className="text-gray-100 text-xl font-bold">MovieBox</p>
                 </div>
 
-                <div>
+                <div className="flex relative">
                     <input className="hidden lg:block bg-transparent w-96 py-1 px-3 border rounded-md placeholder:text-gray-100 placeholder:text-[12px]" type="text" name="search" id="search" placeholder="What do you want to watch?" />
+                    <img className="absolute right-3 top-3 w-3" src={icon} alt="logo" />
                 </div>
 
                 <div className="flex items-center gap-5">
