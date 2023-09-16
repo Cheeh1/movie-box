@@ -30,7 +30,7 @@ const MovieList = () => {
                 setMovies(res.data.results); // Slice the array to include only the first 10 items
 
                 // Extract unique genre IDs from the movie data
-                const genreIds = Array.from(new Set(res.data.results.flatMap(movie => movie.genre_ids)));
+                // const genreIds = Array.from(new Set(res.data.results.flatMap(movie => movie.genre_ids)));
 
                 // Fetch genre data from TMDb API
                 axios.get(`${apiUrl}/3/genre/movie/list?api_key=${apiKey}&language=en-US`)
@@ -63,17 +63,17 @@ const MovieList = () => {
         setFavourites(newFavourites);
 
         // Save the updated favorites to local storage
-        localStorage.setItem('favourites', JSON.stringify(newFavourites))
+        // localStorage.setItem('favourites', JSON.stringify(newFavourites))
       };      
 
-      useEffect(() => {
-        const savedFavourites = localStorage.getItem('favourites')
-        if (savedFavourites) {
-            setFavourites(JSON.parse(savedFavourites))
-        } else {
-            setFavourites(Array(movies.length).fill(false))
-        }
-      },[movies.length])
+    //   useEffect(() => {
+    //     const savedFavourites = localStorage.getItem('favourites')
+    //     if (savedFavourites) {
+    //         setFavourites(JSON.parse(savedFavourites))
+    //     } else {
+    //         setFavourites(Array(movies.length).fill(false))
+    //     }
+    //   },[movies.length])
 
     return (
         <>
