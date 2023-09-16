@@ -143,8 +143,8 @@ const MovieDetails = () => {
                     </div>
                     <div className="flex flex-col lg:flex-row gap-20">
                         <div className="flex flex-col gap-10">
-                            <p data-testid="movie-overview" className="w-[500px] text-[14px] text-[#333]">{movies.overview}</p>
-                            <div className="flex flex-col gap-5 text-[14px]">
+                            <p data-testid="movie-overview" className="w-[500px] text-[16px] text-[#333]">{movies.overview}</p>
+                            <div className="flex flex-col gap-5 text-[16px]">
                                 <p className="text-[#333] font-medium">Director : <span className="text-[#BE123C]">{directors.join(", ")}</span></p>
                                 <p className="text-[#333] font-medium">Writers :  <span className="text-[#BE123C]">{writers.join(", ")}</span></p>
                                 <p className="text-[#333] font-medium">Stars: <span className="text-[#BE123C]">{stars.join(", ")}</span></p>
