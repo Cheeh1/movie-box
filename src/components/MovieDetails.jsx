@@ -14,6 +14,7 @@ import list from '../assets/icons/List.png'
 import gridImg from '../assets/images/grid-img.png'
 import playBig from '../assets/icons/play-big.png'
 import listWhite from '../assets/icons/List-white.png'
+import spinner from '../assets/icons/Spinner.gif'
 
 
 const MovieDetails = () => {
@@ -27,6 +28,7 @@ const MovieDetails = () => {
     const [stars, setStars] = useState([]);
     const [error, setError] = useState(null);
     const [trailer, setTrailer] = useState(null);
+    const [loading, setLoading] = useState(true)
 
     const convertToTwoDecimalPlaces = (number) => (Math.round(number * 10) / 10).toFixed(1)
     // Convert runtime to hours and minutes
@@ -35,10 +37,18 @@ const MovieDetails = () => {
 
     useEffect(() => {
         axios.get(`https://api.themoviedb.org/3/movie/${id}?api_key=${apiKey}`)
-            .then(res => setMovies(res.data))
+            .then(res => {
+                setMovies(res.data)
+                setTimeout(() => {
+                    setLoading(false);
+                }, 1000);
+            })
             .catch(err => {
                 console.log(err)
                 setError('Failed to fetch movie details. Please try again later.')
+                setTimeout(() => {
+                    setLoading(false);
+                }, 1000);
             })
 
         // Fetch movie credits to get writers, directors, and stars
@@ -125,83 +135,86 @@ const MovieDetails = () => {
                 </nav>
 
 
-                {error ? (
-                    // Display error message if an error occurred
-                    <div className="text-red-500">{error}</div>
-                ) : (
-                <section className="flex flex-col gap-5 my-7">
-                    {trailer && (
-                        <div className="flex flex-col gap-5">
-                            <h2 className="text-xl font-bold">Official Trailer</h2>
-                            <div>
-                                <iframe
-                                    // width="950"
-                                    // height="350"
-                                    className="border rounded-3xl w-[950px] h-[350px]"
-                                    src={`https://www.youtube.com/embed/${trailer.key}`}
-                                    title={trailer.name}
-                                ></iframe>
-                            </div>
-                        </div>
-                    )}
+                {loading ?
+                    (<div>
+                        <img className="pl-[300px] pt-[200px]" src={spinner} alt="Loading..." />
+                    </div>) : error ? (
+                        // Display error message if an error occurred
+                        <div className="text-red-500 text-lg font-bold mt-10 text-center">{error}</div>
+                    ) : (
+                        <section className="flex flex-col gap-5 my-7">
+                            {trailer && (
+                                <div className="flex flex-col gap-5">
+                                    <h2 className="text-xl font-bold">Official Trailer</h2>
+                                    <div>
+                                        <iframe
+                                            // width="950"
+                                            // height="350"
+                                            className="border rounded-3xl w-[950px] h-[350px]"
+                                            src={`https://www.youtube.com/embed/${trailer.key}`}
+                                            title={trailer.name}
+                                        ></iframe>
+                                    </div>
+                                </div>
+                            )}
 
-                    <div className="flex flex-col lg:flex-row justify-center items-center gap-5">
-                        <div className="flex gap-2 text-[14px] lg:text-[18px] text-[#404040] font-medium ">
-                            <p data-testid="movie-title">{movies.title}</p>
-                            <p className="lg:text-2xl text-xl -mt-2 font-extrabold">.</p>
-                            <p data-testid="movie-release-date">{(movies.release_date)}</p>
-                            <p className="lg:text-2xl text-xl -mt-2 font-extrabold">.</p>
-                            <p>PG-13</p>
-                            <p className="lg:text-2xl text-xl -mt-2 font-extrabold">.</p>
-                            <p>{runtimeHours}h {runtimeMinutes}min</p>
-                        </div>
-                        <div className="flex items-center gap-40">
-                            <p className="text-gray-400 font-bold text-[12px]">
+                            <div className="flex flex-col lg:flex-row justify-center items-center gap-5">
+                                <div className="flex gap-2 text-[14px] lg:text-[18px] text-[#404040] font-medium ">
+                                    <p data-testid="movie-title">{movies.title}</p>
+                                    <p className="lg:text-2xl text-xl -mt-2 font-extrabold">.</p>
+                                    <p data-testid="movie-release-date">{(movies.release_date)}</p>
+                                    <p className="lg:text-2xl text-xl -mt-2 font-extrabold">.</p>
+                                    <p>PG-13</p>
+                                    <p className="lg:text-2xl text-xl -mt-2 font-extrabold">.</p>
+                                    <p>{runtimeHours}h {runtimeMinutes}min</p>
+                                </div>
+                                <div className="flex items-center gap-40">
+                                    <p className="text-gray-400 font-bold text-[12px]">
 
-                            </p>
-                            <div className="flex items-center gap-2">
-                                <img className="w-5" src={star} alt="star-logo" />
-                                <p className="flex items-center gap-1 text-[#E8E8E8] text-[18px] font-medium">{`${convertToTwoDecimalPlaces(movies.vote_average)}`}<span className="text-[#666] text-[14px]">| 350k</span></p>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="flex flex-col lg:flex-row gap-20">
-                        <div className="flex flex-col gap-10">
-                            <p data-testid="movie-overview" className="w-[500px] text-[16px] text-[#333]">{movies.overview}</p>
-                            <div className="flex flex-col gap-5 text-[16px]">
-                                <p className="text-[#333] font-medium">Director : <span className="text-[#BE123C]">{directors.join(", ")}</span></p>
-                                <p className="text-[#333] font-medium">Writers :  <span className="text-[#BE123C]">{writers.join(", ")}</span></p>
-                                <p className="text-[#333] font-medium">Stars: <span className="text-[#BE123C]">{stars.join(", ")}</span></p>
-                            </div>
-                            <div className="flex gap-5 border rounded-[10px]">
-                                <p className="font-medium text-gray-100 bg-[#BE123C] py-2 px-3 rounded-[10px]">Top rated movie #65</p>
-                                <div className="flex items-center gap-28">
-                                    <p className="text-[#333] font-medium">Awards 9 nominations</p>
-                                    <img className="w-5 mt-1" src={expand} alt="logo" />
+                                    </p>
+                                    <div className="flex items-center gap-2">
+                                        <img className="w-5" src={star} alt="star-logo" />
+                                        <p className="flex items-center gap-1 text-[#E8E8E8] text-[18px] font-medium">{`${convertToTwoDecimalPlaces(movies.vote_average)}`}<span className="text-[#666] text-[14px]">| 350k</span></p>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div className="flex flex-col gap-6">
-                            <div className="flex flex-col gap-3">
-                                <div className="flex justify-center items-center gap-2 bg-[#BE123C] rounded-[10px] p-3">
-                                    <img src={ticket} alt="ticket-logo" />
-                                    <p className="text-gray-100 font-medium">See Showtimes</p>
+                            <div className="flex flex-col lg:flex-row gap-20">
+                                <div className="flex flex-col gap-10">
+                                    <p data-testid="movie-overview" className="w-[500px] text-[16px] text-[#333]">{movies.overview}</p>
+                                    <div className="flex flex-col gap-5 text-[16px]">
+                                        <p className="text-[#333] font-medium">Director : <span className="text-[#BE123C]">{directors.join(", ")}</span></p>
+                                        <p className="text-[#333] font-medium">Writers :  <span className="text-[#BE123C]">{writers.join(", ")}</span></p>
+                                        <p className="text-[#333] font-medium">Stars: <span className="text-[#BE123C]">{stars.join(", ")}</span></p>
+                                    </div>
+                                    <div className="flex gap-5 border rounded-[10px]">
+                                        <p className="font-medium text-gray-100 bg-[#BE123C] py-2 px-3 rounded-[10px]">Top rated movie #65</p>
+                                        <div className="flex items-center gap-28">
+                                            <p className="text-[#333] font-medium">Awards 9 nominations</p>
+                                            <img className="w-5 mt-1" src={expand} alt="logo" />
+                                        </div>
+                                    </div>
                                 </div>
-                                <div className="flex justify-center items-center gap-2 border-[#be123cb3] bg-[#f8e7eb66] p-3 rounded-[10px]">
-                                    <img src={list} alt="list-logo" />
-                                    <p className="text-[#333] font-medium">More watch options</p>
+                                <div className="flex flex-col gap-6">
+                                    <div className="flex flex-col gap-3">
+                                        <div className="flex justify-center items-center gap-2 bg-[#BE123C] rounded-[10px] p-3">
+                                            <img src={ticket} alt="ticket-logo" />
+                                            <p className="text-gray-100 font-medium">See Showtimes</p>
+                                        </div>
+                                        <div className="flex justify-center items-center gap-2 border-[#be123cb3] bg-[#f8e7eb66] p-3 rounded-[10px]">
+                                            <img src={list} alt="list-logo" />
+                                            <p className="text-[#333] font-medium">More watch options</p>
+                                        </div>
+                                    </div>
+                                    <div className="relative flex gap-2">
+                                        <img src={gridImg} alt="list-logo" />
+                                        <div className="absolute left-3 bg-[#12121280] rounded-[10px] py-2 px-10 bottom-0 flex justify-center items-center gap-2">
+                                            <img className="w-5" src={listWhite} alt="grid-images" />
+                                            <p className="text-[#E8E8E8] text-[12px] font-medium">The Best Movies and Shows in September</p>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                            <div className="relative flex gap-2">
-                                <img src={gridImg} alt="list-logo" />
-                                <div className="absolute left-3 bg-[#12121280] rounded-[10px] py-2 px-10 bottom-0 flex justify-center items-center gap-2">
-                                    <img className="w-5" src={listWhite} alt="grid-images" />
-                                    <p className="text-[#E8E8E8] text-[12px] font-medium">The Best Movies and Shows in September</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </section>)}
+                        </section>)}
             </main>
 
 

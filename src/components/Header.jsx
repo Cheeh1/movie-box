@@ -37,7 +37,7 @@ const Header = () => {
                     </div>
                     <div className="flex gap-2 text-gray-100 text-[12px]">
                         <img src={berry} alt="berry-logo"/>
-                        <p>97%</p>
+                        <p>35652</p>
                     </div>
                 </div>
 
