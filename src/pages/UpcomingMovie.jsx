@@ -1,9 +1,4 @@
-import React from 'react'
-import right from '../assets/icons/Chevron-right.svg'
-import imdb from '../assets/icons/imdb.png'
-import berry from '../assets/icons/berry.png'
-import heart from '../assets/icons/Heart.svg'
-import home from '../assets/icons/Home.png'
+import { imdb, berry, heart } from '../assets/index'
 import { Link } from "react-router-dom";
 import useFetch from "../hooks/useFetch";
 
@@ -21,10 +16,13 @@ const UpcomingMovie = () => {
     return (
         <>
             <main className='mx-10 my-10'>
-                <Link to="/" className="flex items-center gap-2 text-[#666] text-xl hover:text-[#BE123C] cursor-pointer font-bold">
-                    <img className='w-10' src={home} alt="home-logo" />
-                    <p>Home</p>
-                </Link>
+                <div className='flex justify-between items-center'>
+                    <Link to="/" className="flex items-center gap-2 text-gray-800 text-xl cursor-pointer font-bold">
+                        <i className="fa-solid fa-house"></i>
+                        <p>Home</p>
+                    </Link>
+                    <p className="text-gray-800 font-bold text-xl lg:text-2xl">Upcoming Movies</p>
+                </div>
 
                 {error ? (
                     // Display error message if an error occurred

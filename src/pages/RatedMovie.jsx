@@ -1,16 +1,11 @@
-import React from 'react'
-import right from '../assets/icons/Chevron-right.svg'
-import imdb from '../assets/icons/imdb.png'
-import berry from '../assets/icons/berry.png'
-import heart from '../assets/icons/Heart.svg'
-import home from '../assets/icons/Home.png'
+import { imdb, berry, heart } from '../assets/index'
 import { Link } from "react-router-dom";
 import useFetch from "../hooks/useFetch";
 
-const PopularMovie = () => {
+const RatedMovie = () => {
 
     const {
-        popular,
+        rated,
         genres,
         favourites,
         error,
@@ -20,18 +15,21 @@ const PopularMovie = () => {
 
     return (
         <>
-            <main className='mx-10 my-20'>
-                <Link to="/" className="flex items-center gap-2 text-[#666] text-xl hover:text-[#BE123C] cursor-pointer font-bold">
-                    <img className='w-10' src={home} alt="home-logo" />
-                    <p>Home</p>
-                </Link>
+            <main className='mx-10 my-10'>
+                <div className='flex justify-between items-center'>
+                    <Link to="/" className="flex items-center gap-2 text-gray-800 text-xl cursor-pointer font-bold">
+                        <i className="fa-solid fa-house"></i>
+                        <p>Home</p>
+                    </Link>
+                    <p className="text-gray-800 font-bold text-xl lg:text-2xl">Rated Movies</p>
+                </div>
 
                 {error ? (
                     // Display error message if an error occurred
                     <div className="text-red-500 text-lg font-bold mt-10 text-center">{error}</div>
                 ) : (
                     <section className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 mt-10">
-                        {popular.map((movie, index) => (
+                        {rated.map((movie, index) => (
                             <div className="relative flex flex-col gap-2 border border-gray-300 rounded-lg p-4" key={movie.id}>
                                 <Link to={`/movies/${movie.id}`}>
                                     <img src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`} alt="img-poster" />
@@ -41,7 +39,7 @@ const PopularMovie = () => {
                                 </div>
                                 <div className="flex text-gray-400 text-[12px] font-bold">
                                     <p>USA,</p>
-                                    <p >{movie.release_date.slice(0, 4)}</p>
+                                    <p>{movie.release_date.slice(0, 4)}</p>
                                 </div>
                                 <Link to={`/movies/${movie.id}`}>
                                     <p className="text-gray-900 text-[18px] font-bold">{movie.title}</p>
@@ -64,4 +62,4 @@ const PopularMovie = () => {
         </>
     )
 }
-export default PopularMovie
+export default RatedMovie
