@@ -3,7 +3,7 @@ import axios from "axios";
 
 const useFetch = () => {
   const [popular, setPopular] = useState([]);
-  const [upcoming, setUpcoming] = useState([]);
+  // const [upcoming, setUpcoming] = useState([]);
   const [genres, setGenres] = useState({});
   const [favourites, setFavourites] = useState(
     Array(popular.length).fill(false)
@@ -44,18 +44,18 @@ const useFetch = () => {
         setError("Failed to fetch movie details. Please try again later.");
       });
 
-    axios
-      .get(
-        `https://api.themoviedb.org/3/movie/upcoming?api_key=${apiKey}`
-      )
-      .then((res) => {
-        console.log(res);
-        setUpcoming(res.data.results);
-      })
-      .catch((err) => {
-        console.log("Error fetching movie data:", err);
-        setError("Failed to fetch movie details. Please try again later");
-      });
+    // axios
+    //   .get(
+    //     `https://api.themoviedb.org/3/movie/upcoming?api_key=${apiKey}`
+    //   )
+    //   .then((res) => {
+    //     console.log(res);
+    //     setUpcoming(res.data.results);
+    //   })
+    //   .catch((err) => {
+    //     console.log("Error fetching movie data:", err);
+    //     setError("Failed to fetch movie details. Please try again later");
+    //   });
 
     // Fetch genre data from TMDb API
     axios
@@ -90,7 +90,7 @@ const useFetch = () => {
 
   return {
     popular,
-    upcoming,
+    // upcoming,
     genres,
     favourites,
     error,
