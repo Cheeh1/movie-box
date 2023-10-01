@@ -127,8 +127,8 @@ const MovieDetails = () => {
                                     <div className="flex flex-col gap-5">
                                         <div>
                                             <iframe
-                                                width=""
-                                                height=""
+                                                // width=""
+                                                // height=""
                                                 className="border rounded-2xl lg:w-[800px] h-[300px] shadow-sm shadow-gray-500"
                                                 src={`https://www.youtube.com/embed/${trailer.key}`}
                                                 title={trailer.name}

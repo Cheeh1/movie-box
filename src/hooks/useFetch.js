@@ -3,7 +3,6 @@ import axios from "axios";
 
 const useFetch = () => {
   const [popular, setPopular] = useState([]);
-  const [rated, setRated] = useState([]);
   const [upcoming, setUpcoming] = useState([]);
   const [genres, setGenres] = useState({});
   const [favourites, setFavourites] = useState(
@@ -11,9 +10,14 @@ const useFetch = () => {
   );
   const [error, setError] = useState(null);
 
-  const toggle = (index) => {
-    const newFavourites = [...favourites];
-    newFavourites[index] = !newFavourites[index];
+  const toggle = (movieId) => {
+    // Copy the current state of favorites
+    const newFavourites = { ...favourites };
+
+    // Toggle the favorite status for the specified movie
+    newFavourites[movieId] = !newFavourites[movieId];
+
+    // Update the favorites state
     setFavourites(newFavourites);
 
     // Save the updated favorites to local storage
@@ -27,7 +31,6 @@ const useFetch = () => {
   useEffect(() => {
     const apiKey = import.meta.env.VITE_TMDB_TOKEN;
 
-    // axios.get(`${apiUrl}/3/movie/top_rated?api_key=${apiKey}`)
     axios
       .get(
         `https://api.themoviedb.org/3/movie/popular?api_key=${apiKey}`
@@ -39,19 +42,6 @@ const useFetch = () => {
       .catch((err) => {
         console.log("Error fetching movie data:", err);
         setError("Failed to fetch movie details. Please try again later.");
-      });
-
-    axios
-      .get(
-        `https://api.themoviedb.org/3/movie/top_rated?api_key=${apiKey}`
-      )
-      .then((res) => {
-        console.log(res);
-        setRated(res.data.results);
-      })
-      .catch((err) => {
-        console.log("Error fetching movie data:", err);
-        setError("Failed to fetch movie details. Please try again later");
       });
 
     axios
@@ -100,7 +90,6 @@ const useFetch = () => {
 
   return {
     popular,
-    rated,
     upcoming,
     genres,
     favourites,
