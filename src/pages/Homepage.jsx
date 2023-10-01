@@ -3,7 +3,7 @@ import useFetch from "../hooks/useFetch";
 import { useState, useEffect } from 'react'
 import axios from 'axios'
 import MovieList from '../components/MovieList'
-import Footer from '../components/footer'
+import Footer from '../components/Footer'
 import { Link } from 'react-router-dom'
 import { Triangle } from 'react-loader-spinner'
 
