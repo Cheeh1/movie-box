@@ -28,7 +28,7 @@ const MovieList = () => {
                             <div className="flex justify-between">
                                 <p className="text-gray-900 font-bold text-xl lg:text-2xl">Popular Movie</p>
                                 <div className="flex gap-1 items-center">
-                                    <Link to="/popular" className="text-rose-700 text-sm">See More</Link>
+                                    <p className="text-rose-700 text-sm cursor-pointer">See More</p>
                                     <img className="w-[15px] mt-[5px]" src={right} alt="right-logo" />
                                 </div>
                             </div>
