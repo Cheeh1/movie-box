@@ -1,9 +1,10 @@
+import { lazy, Suspense } from 'react'
 import { imdb, berry, heart, tv, menu, play, icon } from '../assets/index'
 import useFetch from "../hooks/useFetch";
 import { useState, useEffect } from 'react'
 import axios from 'axios'
-import MovieList from '../components/MovieList'
-import Footer from '../components/Footer'
+const MovieList = lazy(() => import('../components/MovieList'));
+const Footer = lazy(() => import('../components/Footer'));
 import { Link } from 'react-router-dom'
 import { Triangle } from 'react-loader-spinner'
 
@@ -173,10 +174,14 @@ const Homepage = () => {
                                 </div>
                             ) : (
                                 // <p className="text-gray-400">No results found.</p>
-                                <MovieList />
+                                <Suspense fallback={<div>Loading...</div>}>
+                                    <MovieList />
+                                </Suspense>
                             )}
                         </section>
-                        <Footer />
+                        <Suspense fallback={<div>Loading...</div>}>
+                            <Footer />
+                        </Suspense>
                     </>
                 )}
         </>
