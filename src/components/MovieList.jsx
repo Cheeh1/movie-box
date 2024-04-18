@@ -6,7 +6,7 @@ const MovieList = () => {
 
     const {
         popular,
-        // upcoming,
+        upcoming,
         genres,
         favourites,
         error,
@@ -64,7 +64,7 @@ const MovieList = () => {
                             </div>
                         </section>
 
-                        {/* <section className="mt-20">
+                        <section className="mt-20">
                             <div className="flex justify-between">
                                 <p className="text-gray-900 font-bold text-xl lg:text-2xl">Upcoming Movie</p>
                                 <div className="flex gap-1 items-center">
@@ -103,7 +103,7 @@ const MovieList = () => {
                                     </div>
                                 ))}
                             </div>
-                        </section> */}
+                        </section>
                     </main>
                 </>
             )}

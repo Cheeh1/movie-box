@@ -1,3 +1,8 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.text-shadow-custom {
+    text-shadow: 2px 2px 4px rgb(0, 0, 0);
+    /* Custom text shadow with horizontal offset, vertical offset, blur radius, and color */
+}
