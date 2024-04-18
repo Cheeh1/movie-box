@@ -66,13 +66,13 @@ useEffect(() => {
                     // Display error message if an error occurred
                     <div className="text-red-500 text-lg font-bold mt-10 text-center">{error}</div>
                 ) : (
-                    <main className="flex flex-col lg:flex-row gap-20 items-center px-10 py-9 bg-cover bg-center h-screen" style={backgroundImg} >
+                    <main className="flex flex-col lg:flex-row gap-20 items-center px-10 py-9 bg-cover bg-center lg:h-screen" style={backgroundImg} >
                         <section className="flex flex-col gap-20">
                             <Link to="/" className="flex items-center gap-2 text-gray-100 text-xl cursor-pointer font-bold">
                                 <i className="fa-solid fa-house"></i>
                                 <p className="text-shadow-custom">Home</p>
                             </Link>
-                            <img className="rounded-2xl shadow-sm shadow-gray-500" src={`https://image.tmdb.org/t/p/w500/${movies.poster_path}`} alt={movies.title} />
+                            <img className="rounded-2xl shadow-sm shadow-gray-500 h-96 lg:h-full" src={`https://image.tmdb.org/t/p/w500/${movies.poster_path}`} alt={movies.title} />
                         </section>
                         <section className="flex flex-col gap-5 text-gray-100">
                             <div>
@@ -82,7 +82,7 @@ useEffect(() => {
                                             <iframe
                                                 // width=""
                                                 // height=""
-                                                className="border rounded-2xl lg:w-[800px] h-[300px] shadow-sm shadow-gray-500"
+                                                className="border rounded-2xl ml-5 lg:w-[800px] lg:h-[300px] h-96 shadow-sm shadow-gray-500"
                                                 src={`https://www.youtube.com/embed/${trailer.key}`}
                                                 title={trailer.name}
                                             ></iframe>
@@ -92,19 +92,19 @@ useEffect(() => {
                             </div>
                             <div className="flex flex-col">
                                 <h1 className="lg:text-[40px] text-[30px] font-bold text-gray-100 text-shadow-custom">{movies.title}</h1>
-                                <div className="flex flex-col-reverse lg:flex-row lg:gap-3 items-start text-shadow-custom">
+                                <div className="flex flex-col lg:flex-row lg:gap-3 items-start text-shadow-custom">
                                     <div className="flex gap-3">
                                         <p className="border border-[#b1adad] rounded-md px-2 font-bold">PG-13</p>
                                         <p className="lg:text-3xl text-xl -mt-2 lg:-mt-4 font-extrabold">.</p>
                                         <p className="font-bold text-lg">{(movies.release_date)}</p>
                                     </div>
-                                    <div className="flex items-center gap-3">
+                                    <div className="flex flex-col items-start gap-3">
                                         <div className="flex gap-3">
                                             {genres.map((genre, index) => (
                                                 <p key={index} className="text-gray-100 font-bold">{genre.name}</p>
                                             ))}
-                                        </div>
                                         <p className="lg:text-3xl text-xl -mt-2 lg:-mt-4 font-extrabold">.</p>
+                                        </div>
                                         <p className="font-bold text-lg">{runtimeHours}h {runtimeMinutes}min</p>
                                     </div>
                                 </div>
