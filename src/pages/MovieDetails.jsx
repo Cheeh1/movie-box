@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { Link, useParams } from "react-router-dom";
-import MovieDetailsSkeleton from "../components/MovieDetailsSkeleton";
+import MovieDetailSkeleton from "../components/MovieDetailSkeleton";
 
 const MovieDetails = () => {
     const { id } = useParams()
@@ -61,7 +61,7 @@ useEffect(() => {
     return (
         <>
             {loading ?
-                <MovieDetailsSkeleton />
+                <MovieDetailSkeleton />
                  : error ? (
                     // Display error message if an error occurred
                     <div className="text-red-500 text-lg font-bold mt-10 text-center">{error}</div>

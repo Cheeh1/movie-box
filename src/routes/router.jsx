@@ -3,6 +3,7 @@ import Homepage from '../pages/Homepage'
 import MovieDetails from '../pages/MovieDetails'
 import Errorpage from '../pages/Errorpage'
 
+
 const RouterLink = () => {
     return (
         <>
@@ -10,7 +11,7 @@ const RouterLink = () => {
                     <Routes>
                         <Route path='/' element={<Homepage />} />
                         <Route path='/movies/:id' element={<MovieDetails />} />
-                        <Route path='*' element={<Errorpage />} />
+                        <Route path='*' element={<Errorpage />} />                      
                     </Routes>
             </Router>
         </>

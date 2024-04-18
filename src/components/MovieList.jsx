@@ -14,6 +14,10 @@ const MovieList = () => {
         convertToTwoDecimalPlaces,
     } = useFetch();
 
+    const toggleFavorite = (movieId) => {
+        toggle(movieId);
+    }
+
     return (
         <>
 
@@ -38,7 +42,7 @@ const MovieList = () => {
                                         <Link to={`/movies/${movie.id}`}>
                                             <img src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`} alt="img-poster" />
                                         </Link>
-                                        <div onClick={() => toggle(movie.id)} className="absolute right-7 top-7 border cursor-pointer rounded-2xl p-1 bg-[#f3f4f680]">
+                                        <div onClick={() => toggleFavorite(movie.id)} className="absolute right-7 top-7 border cursor-pointer rounded-2xl p-1 bg-[#f3f4f680]">
                                             {!favourites[movie.id] ? (<img src={heart} alt="heart-logo" />) : (<i className="fa-solid fa-heart p-1 text-[#e13509]"></i>)}
                                         </div>
                                         <div className="flex text-gray-400 text-[12px] font-bold">
@@ -79,7 +83,7 @@ const MovieList = () => {
                                         <Link to={`/movies/${movie.id}`}>
                                             <img src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`} alt="img-poster" />
                                         </Link>
-                                        <div onClick={() => toggle(movie.id)} className="absolute right-7 top-7 border cursor-pointer rounded-2xl p-1 bg-[#f3f4f680]">
+                                        <div onClick={() => toggleFavorite(movie.id)} className="absolute right-7 top-7 border cursor-pointer rounded-2xl p-1 bg-[#f3f4f680]">
                                             {!favourites[movie.id] ? (<img src={heart} alt="heart-logo" />) : (<i className="fa-solid fa-heart p-1 text-[#e13509]"></i>)}
                                         </div>
                                         <div className="flex text-gray-400 text-[12px] font-bold">

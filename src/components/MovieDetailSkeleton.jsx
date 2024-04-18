@@ -1,6 +1,5 @@
-import React from "react";
 
-const MovieDetailsSkeleton = () => {
+const MovieDetailSkeleton = () => {
   return (
     <>
       <main className="flex flex-col lg:flex-row gap-20 items-center px-10 py-9 bg-gray-100">
@@ -61,4 +60,4 @@ const MovieDetailsSkeleton = () => {
   );
 };
 
-export default MovieDetailsSkeleton;
+export default MovieDetailSkeleton;

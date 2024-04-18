@@ -7,20 +7,20 @@ const useFetch = () => {
         popular: [],
         upcoming: [],
         genres: {},
-        favourites: [],
+        favourites: {},
         error: null
     });
 
 
 
-   const toggle = (movieId) => {
-        setData(prevData => {
-            const newFavourites = [...prevData.favourites];
-            newFavourites[movieId] = !newFavourites[movieId];
-            localStorage.setItem("favourites", JSON.stringify(newFavourites));
-            return { ...prevData, favourites: newFavourites };
-        });
-    };
+//    const toggle = (movieId) => {
+//         setData(prevData => {
+//             const newFavourites = {...prevData.favourites};
+//             newFavourites[movieId] = !newFavourites[movieId];
+//             localStorage.setItem("favourites", JSON.stringify(newFavourites));
+//             return { ...prevData, favourites: newFavourites };
+//         });
+//     };
 
   // function to convert the number to two numbers before decimal
   const convertToTwoDecimalPlaces = (number) =>
@@ -57,17 +57,17 @@ const useFetch = () => {
 
         fetchData();
 
-        const savedFavourites = localStorage.getItem("favourites");
-        if (savedFavourites) {
-            setData(prevData => ({ ...prevData, favourites: JSON.parse(savedFavourites) }));
-        } else {
-            setData(prevData => ({ ...prevData, favourites: Array(prevData.popular.length).fill(false) }));
-        }
-    }, [data]);
+    //    const savedFavourites = localStorage.getItem("favourites");
+    //     if (savedFavourites) {
+    //         setData(prevData => ({ ...prevData, favourites: JSON.parse(savedFavourites) }));
+    //     } else {
+    //         setData(prevData => ({ ...prevData, favourites: {} }));
+    //     }
+    }, []);
 
   return {
    ...data,
-    toggle,
+    // toggle,
     convertToTwoDecimalPlaces,
   };
 };
