@@ -2,7 +2,7 @@
 const MovieDetailSkeleton = () => {
   return (
     <>
-      <main className="flex flex-col lg:flex-row gap-20 items-center px-10 py-9 bg-gray-100">
+      <main className="flex flex-col lg:flex-row gap-20 items-center px-10 py-9 bg-gray-100 lg:h-[120vh]">
         <section className="flex flex-col gap-20">
           <div className="flex items-center gap-2 text-gray-100 text-xl cursor-pointer font-bold">
             <div className="bg-gray-300 w-20 h-6 rounded-md"></div>
